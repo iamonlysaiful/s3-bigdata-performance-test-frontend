@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 //import * as Highcharts from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 require('highcharts/modules/no-data-to-display')(Highcharts);
-require('highcharts/modules/no-data-to-display')(Highcharts);
 require('highcharts/modules/boost')(Highcharts);
+require('highcharts/modules/exporting')(Highcharts);
 import * as moment from 'moment';
 import { ApiServiceService } from './service/api-service.service';
 //declare var $: any;
@@ -79,6 +79,7 @@ export class AppComponent implements OnInit {
   getReadingData() {
     this.spinnerClass = 'spinner-border';
     let data = this.searchForm.value;
+    localStorage.setItem('searchForm', JSON.stringify(data));
     const startTime = moment(data.daterange[0]).format("DD-MM-YYYYhh-mm-ss-A");
     const endTime = moment(data.daterange[1]).format("DD-MM-YYYYhh-mm-ss-A");
     this.api.getReadingData(data.buildingId, data.objectId, data.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
@@ -90,13 +91,6 @@ export class AppComponent implements OnInit {
         //type: "line",
         turboThreshold: Infinity,
         color: '#1c4c74',
-        // {
-        //   linearGradient: [0, 0, 0, 140],
-        //   stops: [
-        //     [0, 'rgb(28, 76, 116)'],
-        //     [1, 'rgb(97, 172, 228)']
-        //   ]
-        // },
         lineWidth: 1,
         dataGrouping: {
           enabled: false
@@ -107,13 +101,54 @@ export class AppComponent implements OnInit {
     });
   }
 
-  generateReadingChart(series) {
+  generateReadingChart(series, data = null) {
+    let xcount = 0;
+    let apiService: any = this.api;
     this.chartOptions = {
       chart: {
         type: "line",
         zoomType: 'x',
         animation: {
           duration: 1000
+        },
+        events: {
+          // redraw: function () {
+          //   var chart = Highcharts.charts[0];
+          //   var seriesdata = chart.series[0].data;
+          //   setInterval(function () {
+          //     if (xcount >= 5) {
+          //       localStorage.clear();
+          //       return
+          //     }
+
+          //     //console.log(localStorage.getItem('searchForm'));
+          //     var fromdata = JSON.parse(localStorage.getItem('searchForm'));
+
+          //     let startX = moment(fromdata.daterange[1]).add('days', xcount);//.add('minute', 1);
+          //     console.log(xcount = xcount + 1);
+          //     let endX = moment(fromdata.daterange[1]).add('days', xcount);
+          //     const startTime = startX.format('DD-MM-YYYYhh-mm-ss-A');
+          //     const endTime = endX.format("DD-MM-YYYYhh-mm-ss-A");
+
+          //     apiService.getReadingData(fromdata.buildingId, fromdata.objectId, fromdata.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
+          //       console.log(startTime, endTime);
+
+          //       let readingData = res.data.readingQuery.readings;
+          //       let zippedata = _.zip(readingData.timestamp, readingData.value);
+          //       for (let index = 0; index < zippedata.length; index++) {
+          //         const element = zippedata[index];
+          //         seriesdata.push(element);
+
+          //       }
+          //       //_.sortBy(_.uniq(seriesdata)) ;
+          //       setTimeout(() => {
+          //         // console.log(JSON.stringify(seriesdata.toString()));
+          //         chart.series[0].setData(seriesdata);
+          //       }, 2000);
+
+          //     });
+          //   }, 3000);
+          // }
         }
       },
       boost: {
@@ -130,15 +165,11 @@ export class AppComponent implements OnInit {
         enabled: true,
         adaptToUpdatedData: true,
         series: {
-          data: series.data,
-          // dataGrouping: {
-          //   enabled: false
-          // }
+          data: series[0].data,
         }
       },
       rangeSelector: {
         enabled: true,
-        // allButtonsEnabled: true,
         buttons: [{
           type: 'hour',
           count: 1,
@@ -173,11 +204,11 @@ export class AppComponent implements OnInit {
           type: 'all',
           text: 'all'
         }],
+        //selected:1,
         inputEnabled: false,
-        selected: 7 // all
       },
       title: {
-        text: ""//"Sensor Reading Timeseries Data Overview"
+        text: ""
       },
       useHighStocks: true,
       xAxis: {
@@ -194,50 +225,10 @@ export class AppComponent implements OnInit {
             }
           }
         },
-        //minRange: 1,
-        // scrollbar: {
-        //   liveRedraw: false
-        // },
         events: {
           afterSetExtremes: function (e) {
             var chart = Highcharts.charts[0];
-
             chart.showLoading('Loading data from server...');
-            //     //debugger
-            //     if (this.maxDistance !== undefined && e.rangeSelectorButton !== undefined) {
-            //       if (e.rangeSelectorButton.text == '1h') {
-            //         this.maxDistance = 1 * 3600 * 1000; //1hour
-            //       }
-            //       else if (e.rangeSelectorButton.text == "1d") {
-            //         this.maxDistance = 24 * 3600 * 1000;
-            //       }
-            //       else if (e.rangeSelectorButton.text == "1w") {
-            //         this.maxDistance = 7 * 24 * 3600 * 1000;
-            //       }
-            //       else if (e.rangeSelectorButton.text == "2w") {
-            //         this.maxDistance = 14 * 24 * 3600 * 1000;
-            //       }
-            //       else if (e.rangeSelectorButton.text == "1m") {
-            //         this.maxDistance = 30 * 24 * 3600 * 1000;
-            //       }
-            //       else if (e.rangeSelectorButton.text == "1y") {
-            //         this.maxDistance = 365 * 24 * 3600 * 1000;
-            //       }
-            //       else {
-            //         this.maxDistance = (e.max - e.min) * 24 * 3600 * 1000;
-            //       }
-            //     } else {
-            //       this.maxDistance = this.maxDistance === undefined ? 24 * 3600 * 1000 : this.maxDistance; //1hour
-            //     }
-
-            //     var xaxis = this;
-            //     if ((e.max - e.min) > this.maxDistance) {
-            //       var min = e.min;// + this.maxDistance;
-            //       var max = e.min + this.maxDistance;// * 2;
-            //       window.setTimeout(function () {
-            //         xaxis.setExtremes(min, max);
-            //       }, 1);
-            //     }
             chart.hideLoading();
           }
         },
@@ -245,11 +236,10 @@ export class AppComponent implements OnInit {
       yAxis: {
         title: {
           text: "Value"
-        }
+        },
       },
       tooltip: {
         formatter: function () {
-          //console.log(this.point,this.xAxis);
           return '<b>' + this.series.name + '</b><br/>' +
             'Date: ' + Highcharts.dateFormat('%e-%b-%Y %l:%M %p', this.point.category)
             + ', Value: ' + this.y;
@@ -274,17 +264,54 @@ export class AppComponent implements OnInit {
       series: series
     };
     this.spinnerClass = '';
+    if (data !== null) {
+      var chart = Highcharts.charts[0];
+      let xx = moment(data.daterange[0]).add('days', 366);
+      const startTime = xx.format('DD-MM-YYYYhh-mm-ss-A');
+      const endTime = moment(data.daterange[1]).format("DD-MM-YYYYhh-mm-ss-A");
+      this.api.getReadingData(data.buildingId, data.objectId, data.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
+        let readingData = res.data.readingQuery.readings;
+        let dd = _.zip(readingData.timestamp, readingData.value);
+        for (let index = 0; index < dd.length; index++) {
+          const element = dd[index];
+          series[0].data.push(element);
+        }
+        chart.series[0].setData(series[0].data);
+      });
+    }
   }
 
   public selectedMoment = new Date();//moment().formate();
-  //public selectedMoments = [new Date(2018, 1, 12, 10, 30), new Date(2018, 3, 21, 20, 30)];
 
   onSearchClick() {
     this.getReadingData();
+    //this.getReadingDataV2();
   }
 
-  mouseover(e) {
-    //console.log(e)
+
+  getReadingDataV2() {
+    let data = this.searchForm.value;
+    this.spinnerClass = 'spinner-border';
+    const startTime = moment(data.daterange[0]).format("DD-MM-YYYYhh-mm-ss-A");
+    let xx = moment(data.daterange[0]).add('days', 365);
+    const endTime = xx.format('DD-MM-YYYYhh-mm-ss-A');
+    this.spinnerClass = 'spinner-border';
+    this.api.getReadingData(data.buildingId, data.objectId, data.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
+      let readingData = res.data.readingQuery.readings;
+      this.readingSeries = [];
+      this.readingSeries.push({
+        name: readingData.objectName + ' ' + readingData.dataFieldName,
+        data: _.zip(readingData.timestamp, readingData.value),
+        turboThreshold: Infinity,
+        color: '#1c4c74',
+        lineWidth: 1,
+        dataGrouping: {
+          enabled: false
+        }
+      });
+      this.generateReadingChart(this.readingSeries, data);
+    });
+
   }
 
 }

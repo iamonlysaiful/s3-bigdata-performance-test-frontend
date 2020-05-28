@@ -20,7 +20,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <label for="inputState">Building</label>
-                <select id="inputState" class="form-control selectpicker" (mouseover)="mouseover($event)"
+                <select id="inputState" class="form-control"
                   formControlName="buildingId">
                   <option value="" selected disabled>Choose Building</option>
                   <option *ngFor="let obj of buildingList" ngValue="{{obj.id}}">{{obj.name}}</option>
@@ -28,7 +28,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="inputState">Object</label>
-                <select id="inputState" class="form-control selectpicker" (mouseover)="mouseover($event)"
+                <select id="inputState" class="form-control" 
                   formControlName="objectId">
                   <option value="" selected disabled>Choose Object</option>
                   <option *ngFor="let obj of objectList" ngValue="{{obj.id}}">{{obj.name}}</option>
@@ -36,7 +36,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="inputState">Data Field</label>
-                <select id="inputState" class="form-control selectpicker" (mouseover)="mouseover($event)"
+                <select id="inputState" class="form-control" 
                   formControlName="datafieldId">
                   <option value="" selected disabled>Choose Data Field</option>
                   <option *ngFor="let obj of dfList" ngValue="{{obj.id}}">{{obj.name}}</option>
@@ -74,7 +74,7 @@
     
     <span [ngClass]="spinnerClass" ></span>
     <div class="spinner-overlay" *ngIf="spinnerClass!==''"></div>
-    <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions" >
+    <highcharts-chart [Highcharts]="highcharts"  [options]="chartOptions"  >
     </highcharts-chart>
     <span class="please-wait" *ngIf="spinnerClass!==''">Loading... Please wait! </span>
 
