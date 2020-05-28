@@ -1,92 +1,53 @@
+.m-4{
+  margin: 1.5rem;
+}
 .mat-raised-button{
     margin-top:3.5px;
     margin-bottom: 22px;
     border: none !important;
 }
-// .btndiv{
-//     margin-left:1rem;
-//     margin-right:-1rem;
-// }
-
 .spinner-border {
     width: 6rem;
     height: 6rem;
     position: absolute;
     z-index: 999;
     top:40%;
-    border: 0.4em solid gray;
     border-right-color: transparent;
     
 }
-
 .spinner-overlay{
-    position: absolute;
-    z-index: 1001;
-    background-color: gray;
-    opacity: 10%;
-    width:100%;
-    height:450px
-}
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(60, 138, 255, 0.1); /* Black background with opacity */
+  opacity: 0.5;
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: progress; /* Add a pointer on hover */
 
-.chart-card-body{
-  flex-direction: row;
-  box-sizing: border-box;
-  display: flex;
-  place-content: center;
-  align-items: center;
+  highcharts-chart{
+    display:none !important;
+  }
 }
-
 .please-wait{
     position: absolute;
     z-index: 999;
     font: 1.5em calibri;
     top:62%;
-    color: gray;
+    color: #1c4c74;
 }
-
 highcharts-chart{
     width: 100%; 
     height: 450px; 
     display: block;
 }
-
 .highcharts-navigator, .highcharts-navigator * {
     cursor : default !important
   }
-
-i{
-    color: #1c4c74;
-}
-
-.card-header{
-    background-color: white;
-    color: #1c4c74;
-    font-weight: 400;
-
-    i{
-        color: #1c4c74;
-    }
-}
-
-// .form-control:focus, .form-control:hover{
-//     box-shadow: 0 0 0 0.2rem rgba($color: #1c4c74, $alpha: 0.4);
-//     border-color: none;
-//     outline: #1c4c74 auto 5px ;
-// }
-
-// .btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{
-//     box-shadow: 0 0 0 0.2rem rgba($color: #1c4c74, $alpha: 0.4);
-//     border-color: none;
-//     outline: #1c4c74 auto 5px ;
-// }
-
-// .form-control:disabled, .form-control[readonly] {
-//     background-color: rgba(63,81,181,.2);
-// }
-
-.card{
-    position: relative;
-}
 .mat-card::after{
     z-index: -1;
   position: absolute;
@@ -107,16 +68,12 @@ i{
   -ms-transform: rotate(3deg);
   transform: rotate(3deg);
 }
-
-
 // ======================================================
-  
 .header-box {
   width: 100%;
   margin: auto;
   text-align: center;
 }
-
 .header-box form a {
   position: relative;
   display: inline-block;
@@ -130,12 +87,10 @@ i{
   margin-top: 1.5rem;
   letter-spacing: 4px
 }
-
 .header-box a span {
   position: absolute;
   display: block;
 }
-
 .header-box a span:nth-child(1) {
   top: 0;
   left: -100%;
@@ -144,7 +99,6 @@ i{
   background: linear-gradient(90deg, transparent, #1c4c74);
   animation: btn-anim1 2s linear infinite;
 }
-
 @keyframes btn-anim1 {
   0% {
     left: -100%;
@@ -153,7 +107,6 @@ i{
     left: 100%;
   }
 }
-
 .header-box a span:nth-child(2) {
   top: -100%;
   right: 0;
@@ -163,7 +116,6 @@ i{
   animation: btn-anim2 2s linear infinite;
   animation-delay: 1.25s
 }
-
 @keyframes btn-anim2 {
   0% {
     top: -100%;
@@ -172,7 +124,6 @@ i{
     top: 100%;
   }
 }
-
 .header-box a span:nth-child(3) {
   bottom: 0;
   right: -100%;
@@ -182,7 +133,6 @@ i{
   animation: btn-anim3 2s linear infinite;
   animation-delay: 1.5s
 }
-
 @keyframes btn-anim3 {
   0% {
     right: -100%;
@@ -191,7 +141,6 @@ i{
     right: 100%;
   }
 }
-
 .header-box a span:nth-child(4) {
   bottom: -100%;
   left: 0;
@@ -201,7 +150,6 @@ i{
   animation: btn-anim4 2s linear infinite;
   animation-delay: 1.75s
 }
-
 @keyframes btn-anim4 {
   0% {
     bottom: -100%;
@@ -210,18 +158,25 @@ i{
     bottom: 100%;
   }
 }
-
 mat-card-header{
   .material-icons{
     line-height: unset !important;
   }
 }
-
 .mat-card{
   padding-bottom: 0;
 }
-
+.mat-card-title{
+  font-weight: 400;
+} 
 .mat-card-content{
   margin-top: 20px;
 }
-
+mat-form-field{
+  margin-right: 20px;
+}
+.item{
+  background-color: black;
+  border: 1px solid white;
+  color:white
+}

@@ -21,6 +21,7 @@ import {  MatFormFieldModule } from '@angular/material/form-field';
 import {  MatInputModule } from '@angular/material/input';
 import {  MatSelectModule } from '@angular/material/select';
 import {  MatDividerModule } from '@angular/material/divider';
+import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {  MatDividerModule } from '@angular/material/divider';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
     
   ],
   providers: [],
@@ -55,26 +57,3 @@ import {  MatDividerModule } from '@angular/material/divider';
 })
 export class AppModule { }
 
-// import {
-//   MatButtonModule,
-//   MatInputModule,
-//   MatCheckboxModule,
-//   MatIconModule,
-//   MatFormFieldModule,
-//   MatSelectModule,
-//   MatRadioModule,
-//   MatDialogModule,
-//   MatDividerModule,
-//   MatDatepickerModule,
-//   MatNativeDateModule,
-//   MatSnackBarModule,
-//   MatProgressBarModule,
-//   MatAutocompleteModule,
-//   MatProgressSpinnerModule,
-//   MatPaginatorModule,
-//   MatButtonToggleModule,
-//   MatChipsModule,
-//   MatMenuModule,
-//   MatTooltipModule,
-//   MatRippleModule
-// } from '@angular/material';

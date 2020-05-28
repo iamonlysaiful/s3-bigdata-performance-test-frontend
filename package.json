@@ -27,8 +27,6 @@
     "apollo-cache-inmemory": "^1.6.0",
     "apollo-client": "^2.6.0",
     "apollo-link": "^1.2.11",
-    "bootstrap": "^4.4.1",
-    "font-awesome": "^4.7.0",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.0",
     "highcharts": "^8.1.0",

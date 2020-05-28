@@ -9,7 +9,6 @@
     </a>
   </form>
 </div>
-
 <mat-card class="example-card m-4">
   <mat-card-header>
     <mat-icon mat-card-avatar>tune</mat-icon>
@@ -18,58 +17,43 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <form [formGroup]="searchForm">
-
-      <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex>
-        <div fxFlex="50" fxLayoutGap="20px">
-          <mat-form-field appearance="outline">
-            <mat-label>Choose Building</mat-label>
-            <mat-select formControlName="buildingId">
-              <mat-option *ngFor="let obj of buildingList" value="{{obj.id}}">{{obj.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Choose Object</mat-label>
-            <mat-select formControlName="objectId">
-              <mat-option *ngFor="let obj of objectList" value="{{obj.id}}">{{obj.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Choose Data Field</mat-label>
-            <mat-select formControlName="datafieldId">
-              <mat-option *ngFor="let obj of dfList" value="{{obj.id}}">{{obj.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div fxFlex="50" fxLayoutGap="20px">
-          <mat-form-field fxFlex="45" fxFlexOffset="40" appearance="outline">
+      <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Choose Building</mat-label>
+          <mat-select formControlName="buildingId">
+            <mat-option *ngFor="let obj of buildingList" value="{{obj.id}}">{{obj.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Choose Object</mat-label>
+          <mat-select formControlName="objectId">
+            <mat-option *ngFor="let obj of objectList" value="{{obj.id}}">{{obj.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Choose Data Field</mat-label>
+          <mat-select formControlName="datafieldId">
+            <mat-option *ngFor="let obj of dfList" value="{{obj.id}}">{{obj.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="container" fxFlex="40%" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+          <mat-form-field appearance="outline" fxFlex="65%" fxFlexOffset="50px" fxFlexOffset.xs="0">
             <mat-label>Date Time Range</mat-label>
             <input matInput name="daterange" readonly formControlName="daterange" [selectMode]="'range'"
               [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
             <owl-date-time #dtPicker3></owl-date-time>
           </mat-form-field>
-
-          <div class="example-button-row">
-            <button fxFlex="100" mat-raised-button type="submit" (click)="onSearchClick()"
-              [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null">
-              <mat-icon>search</mat-icon>
-              <mat-label>Search</mat-label>
-            </button>
-          </div>
-
+          <button fxFlex mat-raised-button type="submit" color="primary" (click)="onSearchClick()"
+            [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null">
+            <mat-icon>search</mat-icon>
+            <mat-label>Search</mat-label>
+          </button>
         </div>
       </div>
 
     </form>
   </mat-card-content>
-  
-  <!-- <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions> -->
-
 </mat-card>
 <mat-card class="example-card m-4">
   <mat-card-header>
@@ -78,90 +62,18 @@
   </mat-card-header>
   <mat-divider></mat-divider>
 
-  <mat-card-content>
-   <span [ngClass]="spinnerClass"></span>
-    <div class="spinner-overlay" *ngIf="spinnerClass!==''"></div>
-    <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions">
-    </highcharts-chart>
-    <span class="please-wait" *ngIf="spinnerClass!==''">Loading... Please wait! </span>
+  <mat-card-content style="min-height: 500px;">
+    <!-- <span [ngClass]="spinnerClass"></span> -->
+    <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+      <mat-progress-spinner mode="indeterminate" class="spinner-border" *ngIf="spinnerClass!==''">
+      </mat-progress-spinner>
+      <div class="spinner-overlay" *ngIf="spinnerClass!==''"></div>
+      <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions" [style.display]="displayChart()">
+      </highcharts-chart>
+      <span class="please-wait" *ngIf="spinnerClass!==''">Loading... Please wait! </span>
+    </div>
+
   </mat-card-content>
 
 </mat-card>
-<!-- 
-<div class="card m-4">
-  <h3 class="card-header"><i class="fa fa-desktop" aria-hidden="true"></i> &nbsp; Search Inputs</h3>
-  <div class="card-body">
-    <form [formGroup]="searchForm">
-      <div class="form-row m-2">
-        <div class="col-md-12 row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="form-group col-md-4">
-                <label for="inputState">Building</label>
-                <select id="inputState" class="form-control" formControlName="buildingId">
-                  <option value="" selected disabled>Choose Building</option>
-                  <option *ngFor="let obj of buildingList" ngValue="{{obj.id}}">{{obj.name}}</option>
-                </select>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="inputState">Object</label>
-                <select id="inputState" class="form-control" formControlName="objectId">
-                  <option value="" selected disabled>Choose Object</option>
-                  <option *ngFor="let obj of objectList" ngValue="{{obj.id}}">{{obj.name}}</option>
-                </select>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="inputState">Data Field</label>
-                <select id="inputState" class="form-control" formControlName="datafieldId">
-                  <option value="" selected disabled>Choose Data Field</option>
-                  <option *ngFor="let obj of dfList" ngValue="{{obj.id}}">{{obj.name}}</option>
-                </select>
-              </div>
-            </div>
-
-          </div>
-          <div class="row col-md-6 pl-0 pr-0 btndiv">
-            <div class="col-md-2"></div>
-            <div class="form-group col-md-7">
-              <label for="inputState">Datetime Range</label>
-              <div class="input-wrapper">
-                <input class="form-control text-center" name="daterange" readonly formControlName="daterange"
-                  [selectMode]="'range'" [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
-                <owl-date-time #dtPicker3></owl-date-time>
-              </div>
-
-            </div>
-            <div class="form-group col-md-3 pl-0 pr-0 text-right">
-              <button type="submit" (click)="onSearchClick()"
-                [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null"
-                class="btn btn-primary mbutton"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                Search </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div> -->
-
-<!-- <div class="card m-4">
-  <h3 class="card-header"><i class="fa fa-area-chart" aria-hidden="true"> &nbsp;</i> Time Series Data</h3>
-  <div class="card-body chart-card-body">
-
-    <span [ngClass]="spinnerClass"></span>
-    <div class="spinner-overlay" *ngIf="spinnerClass!==''"></div>
-    <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions">
-    </highcharts-chart>
-    <span class="please-wait" *ngIf="spinnerClass!==''">Loading... Please wait! </span>
-
-  </div>
-</div> -->
-<!-- <div class="card m-4">
-  <h3 class="card-header"><i class="fa fa-area-chart" aria-hidden="true"> &nbsp;</i> Time Series Data</h3>
-  <div class="card-body">
-    <highcharts-chart style="width: 100%; display: block" [Highcharts]="highcharts1" [constructorType]="'stockChart'"
-      [options]="chartOptions1">
-    </highcharts-chart>
-  </div>
-</div> -->
 <router-outlet></router-outlet>

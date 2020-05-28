@@ -6,7 +6,6 @@ require('highcharts/modules/boost')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 import * as moment from 'moment';
 import { ApiServiceService } from './service/api-service.service';
-//declare var $: any;
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import * as _ from 'underscore';
 
@@ -24,13 +23,6 @@ export class AppComponent implements OnInit {
     name: '', data: [],
     turboThreshold: 1,
     color: '#1c4c74',
-    // {
-    //   linearGradient: [0, 0, 0, 140],
-    //   stops: [
-    //     [0, 'rgb(28, 76, 116)'],
-    //     [1, 'rgb(97, 172, 228)']
-    //   ]
-    // },
     lineWidth: 1,
     dataGrouping: {
       enabled: false
@@ -100,55 +92,18 @@ export class AppComponent implements OnInit {
 
     });
   }
-
+  displayChart() {
+    if (this.spinnerClass !== '') {
+      return 'none'
+    }
+  }
   generateReadingChart(series, data = null) {
-    let xcount = 0;
-    let apiService: any = this.api;
     this.chartOptions = {
       chart: {
         type: "line",
         zoomType: 'x',
         animation: {
           duration: 1000
-        },
-        events: {
-          // redraw: function () {
-          //   var chart = Highcharts.charts[0];
-          //   var seriesdata = chart.series[0].data;
-          //   setInterval(function () {
-          //     if (xcount >= 5) {
-          //       localStorage.clear();
-          //       return
-          //     }
-
-          //     //console.log(localStorage.getItem('searchForm'));
-          //     var fromdata = JSON.parse(localStorage.getItem('searchForm'));
-
-          //     let startX = moment(fromdata.daterange[1]).add('days', xcount);//.add('minute', 1);
-          //     console.log(xcount = xcount + 1);
-          //     let endX = moment(fromdata.daterange[1]).add('days', xcount);
-          //     const startTime = startX.format('DD-MM-YYYYhh-mm-ss-A');
-          //     const endTime = endX.format("DD-MM-YYYYhh-mm-ss-A");
-
-          //     apiService.getReadingData(fromdata.buildingId, fromdata.objectId, fromdata.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
-          //       console.log(startTime, endTime);
-
-          //       let readingData = res.data.readingQuery.readings;
-          //       let zippedata = _.zip(readingData.timestamp, readingData.value);
-          //       for (let index = 0; index < zippedata.length; index++) {
-          //         const element = zippedata[index];
-          //         seriesdata.push(element);
-
-          //       }
-          //       //_.sortBy(_.uniq(seriesdata)) ;
-          //       setTimeout(() => {
-          //         // console.log(JSON.stringify(seriesdata.toString()));
-          //         chart.series[0].setData(seriesdata);
-          //       }, 2000);
-
-          //     });
-          //   }, 3000);
-          // }
         }
       },
       boost: {
@@ -160,7 +115,6 @@ export class AppComponent implements OnInit {
         timeSeriesProcessing: true,
         timeSetup: true
       },
-
       navigator: {
         enabled: true,
         adaptToUpdatedData: true,
@@ -278,54 +232,11 @@ export class AppComponent implements OnInit {
       series: series
     };
     this.spinnerClass = '';
-    if (data !== null) {
-      var chart = Highcharts.charts[0];
-      let xx = moment(data.daterange[0]).add('days', 366);
-      const startTime = xx.format('DD-MM-YYYYhh-mm-ss-A');
-      const endTime = moment(data.daterange[1]).format("DD-MM-YYYYhh-mm-ss-A");
-      this.api.getReadingData(data.buildingId, data.objectId, data.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
-        let readingData = res.data.readingQuery.readings;
-        let dd = _.zip(readingData.timestamp, readingData.value);
-        for (let index = 0; index < dd.length; index++) {
-          const element = dd[index];
-          series[0].data.push(element);
-        }
-        chart.series[0].setData(series[0].data);
-      });
-    }
   }
 
-  public selectedMoment = new Date();//moment().formate();
+  public selectedMoment = new Date();
 
   onSearchClick() {
     this.getReadingData();
-    //this.getReadingDataV2();
   }
-
-
-  getReadingDataV2() {
-    let data = this.searchForm.value;
-    this.spinnerClass = 'spinner-border';
-    const startTime = moment(data.daterange[0]).format("DD-MM-YYYYhh-mm-ss-A");
-    let xx = moment(data.daterange[0]).add('days', 365);
-    const endTime = xx.format('DD-MM-YYYYhh-mm-ss-A');
-    this.spinnerClass = 'spinner-border';
-    this.api.getReadingData(data.buildingId, data.objectId, data.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
-      let readingData = res.data.readingQuery.readings;
-      this.readingSeries = [];
-      this.readingSeries.push({
-        name: readingData.objectName + ' ' + readingData.dataFieldName,
-        data: _.zip(readingData.timestamp, readingData.value),
-        turboThreshold: Infinity,
-        color: '#1c4c74',
-        lineWidth: 1,
-        dataGrouping: {
-          enabled: false
-        }
-      });
-      this.generateReadingChart(this.readingSeries, data);
-    });
-
-  }
-
 }
