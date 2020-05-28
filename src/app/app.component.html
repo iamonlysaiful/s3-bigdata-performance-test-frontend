@@ -1,4 +1,4 @@
-<div class="header-box">
+<div class="header-box m-4">
   <form>
     <a href="#">
       <span></span>
@@ -17,7 +17,7 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <form [formGroup]="searchForm">
-      <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.lt-md="column" fxLayout.md="row wrap" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
         <mat-form-field appearance="outline" fxFlex>
           <mat-label>Choose Building</mat-label>
           <mat-select formControlName="buildingId">
@@ -36,15 +36,14 @@
             <mat-option *ngFor="let obj of dfList" value="{{obj.id}}">{{obj.name}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <div class="container" fxFlex="40%" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
-          fxLayoutGap.xs="0">
-          <mat-form-field appearance="outline" fxFlex="65%" fxFlexOffset="50px" fxFlexOffset.xs="0">
+        <div class="container" fxFlex="40" fxLayout="row" fxLayout.xs="column" fxLayout.md="row"  fxLayout.lt-md="column"   fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+          <mat-form-field appearance="outline" fxFlex="65" fxFlexOffset="50px" fxFlexOffset.xs="0" fxFlexOffset.md="0">
             <mat-label>Date Time Range</mat-label>
             <input matInput name="daterange" readonly formControlName="daterange" [selectMode]="'range'"
               [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
             <owl-date-time #dtPicker3></owl-date-time>
           </mat-form-field>
-          <button fxFlex mat-raised-button type="submit" color="primary" (click)="onSearchClick()"
+          <button fxFlex="35" mat-raised-button type="submit" color="primary" (click)="onSearchClick()"
             [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null">
             <mat-icon>search</mat-icon>
             <mat-label>Search</mat-label>
@@ -64,7 +63,7 @@
 
   <mat-card-content style="min-height: 500px;">
     <!-- <span [ngClass]="spinnerClass"></span> -->
-    <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFlex="98">
       <mat-progress-spinner mode="indeterminate" class="spinner-border" *ngIf="spinnerClass!==''">
       </mat-progress-spinner>
       <div class="spinner-overlay" *ngIf="spinnerClass!==''"></div>
