@@ -206,6 +206,10 @@ export class AppComponent implements OnInit {
         }],
         //selected:1,
         inputEnabled: false,
+        style: {
+          fontWeight: 'normal',
+          color: '#1c4c74'
+        }
       },
       title: {
         text: ""
@@ -214,6 +218,11 @@ export class AppComponent implements OnInit {
       xAxis: {
         title: {
           text: "Time",
+          style: {
+            fontWeight: 'normal',
+            fontSize: '14px',
+            color: '#1c4c74'
+          }
         },
         labels: {
           rotation: 0,
@@ -235,7 +244,12 @@ export class AppComponent implements OnInit {
       },
       yAxis: {
         title: {
-          text: "Value"
+          text: "Value",
+          style: {
+            fontWeight: 'normal',
+            fontSize: '14px',
+            color: '#1c4c74'
+          }
         },
       },
       tooltip: {
@@ -252,7 +266,7 @@ export class AppComponent implements OnInit {
         style: {
           fontWeight: 'normal',
           fontSize: '18px',
-          color: '#707070'
+          color: '#1c4c74'
         }
       },
       plotOptions: {

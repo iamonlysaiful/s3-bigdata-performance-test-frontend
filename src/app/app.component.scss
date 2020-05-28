@@ -1,20 +1,12 @@
-body{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
+.mat-raised-button{
+    margin-top:3.5px;
+    margin-bottom: 22px;
+    border: none !important;
 }
-
-.mbutton{
-    margin-top:1.75rem;
-    background-color:#1c4c74 ;
-    width: 80%;
-    i{
-        color:rgba(255,255,255,.85);;
-    }
-}
-.btndiv{
-    margin-left:1rem;
-    margin-right:-1rem;
-}
+// .btndiv{
+//     margin-left:1rem;
+//     margin-right:-1rem;
+// }
 
 .spinner-border {
     width: 6rem;
@@ -76,26 +68,26 @@ i{
     }
 }
 
-.form-control:focus, .form-control:hover{
-    box-shadow: 0 0 0 0.2rem rgba($color: #1c4c74, $alpha: 0.4);
-    border-color: none;
-    outline: #1c4c74 auto 5px ;
-}
+// .form-control:focus, .form-control:hover{
+//     box-shadow: 0 0 0 0.2rem rgba($color: #1c4c74, $alpha: 0.4);
+//     border-color: none;
+//     outline: #1c4c74 auto 5px ;
+// }
 
-.btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{
-    box-shadow: 0 0 0 0.2rem rgba($color: #1c4c74, $alpha: 0.4);
-    border-color: none;
-    outline: #1c4c74 auto 5px ;
-}
+// .btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{
+//     box-shadow: 0 0 0 0.2rem rgba($color: #1c4c74, $alpha: 0.4);
+//     border-color: none;
+//     outline: #1c4c74 auto 5px ;
+// }
 
-.form-control:disabled, .form-control[readonly] {
-    background-color: rgba(63,81,181,.2);
-}
+// .form-control:disabled, .form-control[readonly] {
+//     background-color: rgba(63,81,181,.2);
+// }
 
 .card{
     position: relative;
 }
-.card::after{
+.mat-card::after{
     z-index: -1;
   position: absolute;
   content: "";
@@ -218,3 +210,18 @@ i{
     bottom: 100%;
   }
 }
+
+mat-card-header{
+  .material-icons{
+    line-height: unset !important;
+  }
+}
+
+.mat-card{
+  padding-bottom: 0;
+}
+
+.mat-card-content{
+  margin-top: 20px;
+}
+

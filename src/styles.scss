@@ -5,3 +5,9 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
+body{
+    background-color: rgba(28,76,116, .02) !important;
+    // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
