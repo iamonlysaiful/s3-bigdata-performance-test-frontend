@@ -9,7 +9,7 @@
     </a>
   </form>
 </div>
-<mat-card class="example-card m-4">
+<mat-card class="m-4">
   <mat-card-header>
     <mat-icon mat-card-avatar>tune</mat-icon>
     <mat-card-title>Search Inputs</mat-card-title>
@@ -54,15 +54,14 @@
     </form>
   </mat-card-content>
 </mat-card>
-<mat-card class="example-card m-4">
+<mat-card class="m-4">
   <mat-card-header>
     <mat-icon mat-card-avatar>graphic_eq</mat-icon>
     <mat-card-title>Time Series Data</mat-card-title>
   </mat-card-header>
   <mat-divider></mat-divider>
 
-  <mat-card-content style="min-height: 500px;">
-    <!-- <span [ngClass]="spinnerClass"></span> -->
+  <mat-card-content class="chart-card">
     <div fxLayout="row" fxLayoutAlign="center center" fxFlex="98">
       <mat-progress-spinner mode="indeterminate" class="spinner-border" *ngIf="spinnerClass!==''">
       </mat-progress-spinner>
@@ -71,8 +70,6 @@
       </highcharts-chart>
       <span class="please-wait" *ngIf="spinnerClass!==''">Loading... Please wait! </span>
     </div>
-
   </mat-card-content>
-
 </mat-card>
 <router-outlet></router-outlet>

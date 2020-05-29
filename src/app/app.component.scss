@@ -48,6 +48,9 @@ highcharts-chart{
 .highcharts-navigator, .highcharts-navigator * {
     cursor : default !important
   }
+.chart-card{
+    min-height: 500px;
+}
 .mat-card::after{
     z-index: -1;
   position: absolute;
