@@ -1,0 +1,45 @@
+.chart-card{
+    min-height: 500px;
+}
+  
+.highcharts-navigator, .highcharts-navigator * {
+  cursor : default !important
+}
+  
+highcharts-chart{
+  width: 100%; 
+  height: 450px; 
+  display: block;
+}
+
+.please-wait{
+  position: absolute;
+  z-index: 999;
+  font: 1.5em calibri;
+  top:62%;
+  color: #1c4c74;
+}
+
+.spinner-border {
+width: 6rem;
+height: 6rem;
+position: absolute;
+z-index: 999;
+top:40%;
+border-right-color: transparent;
+}
+
+.spinner-overlay{
+position: fixed; 
+display: block; 
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.1);
+opacity: 0.5;
+z-index: 2;
+cursor: progress;
+}

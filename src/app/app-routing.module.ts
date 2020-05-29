@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-const routes: Routes = [];
+export const routes: Routes = [
+  {
+      path: '',
+      loadChildren: () => import('./../app/main/s3itest.module').then(m => m.S3itestModule)
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

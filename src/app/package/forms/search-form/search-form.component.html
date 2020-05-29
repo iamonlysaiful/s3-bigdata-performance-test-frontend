@@ -1,0 +1,46 @@
+<mat-card class="m-4">
+  <mat-card-header>
+    <mat-icon mat-card-avatar>tune</mat-icon>
+    <mat-card-title>Search Inputs</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form [formGroup]="searchForm">
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.lt-md="column" fxLayout.md="row wrap"
+        fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Choose Building</mat-label>
+          <mat-select formControlName="buildingId">
+            <mat-option *ngFor="let obj of buildingList" value="{{obj.id}}">{{obj.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Choose Object</mat-label>
+          <mat-select formControlName="objectId">
+            <mat-option *ngFor="let obj of objectList" value="{{obj.id}}">{{obj.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Choose Data Field</mat-label>
+          <mat-select formControlName="datafieldId">
+            <mat-option *ngFor="let obj of dfList" value="{{obj.id}}">{{obj.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="container" fxFlex="40" fxLayout="row" fxLayout.xs="column" fxLayout.md="row" fxLayout.lt-md="column"
+          fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+          <mat-form-field appearance="outline" fxFlex="65" fxFlexOffset="50px" fxFlexOffset.xs="0" fxFlexOffset.md="0">
+            <mat-label>Date Time Range</mat-label>
+            <input matInput name="daterange" readonly formControlName="daterange" [selectMode]="'range'"
+              [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
+            <owl-date-time #dtPicker3></owl-date-time>
+          </mat-form-field>
+          <button fxFlex="35" mat-raised-button type="submit" color="primary" (click)="onClick()"
+            [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null">
+            <mat-icon>search</mat-icon>
+            <mat-label>Search</mat-label>
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

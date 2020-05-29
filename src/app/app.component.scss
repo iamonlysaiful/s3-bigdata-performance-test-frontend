@@ -1,82 +1,45 @@
-.m-4{
-  margin: 1.5rem;
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
 }
-.mat-raised-button{
-    margin-top:3.5px;
-    margin-bottom: 22px;
-    border: none !important;
-}
-.spinner-border {
-    width: 6rem;
-    height: 6rem;
-    position: absolute;
-    z-index: 999;
-    top:40%;
-    border-right-color: transparent;
-    
-}
-.spinner-overlay{
-  position: fixed; /* Sit on top of the page content */
-  display: block; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(60, 138, 255, 0.1); /* Black background with opacity */
-  opacity: 0.5;
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-  cursor: progress; /* Add a pointer on hover */
 
-  highcharts-chart{
-    display:none !important;
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
   }
 }
-.please-wait{
-    position: absolute;
-    z-index: 999;
-    font: 1.5em calibri;
-    top:62%;
-    color: #1c4c74;
-}
-highcharts-chart{
-    width: 100%; 
-    height: 450px; 
-    display: block;
-}
-.highcharts-navigator, .highcharts-navigator * {
-    cursor : default !important
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
   }
-.chart-card{
-    min-height: 500px;
+  50%,100% {
+    right: 100%;
+  }
 }
-.mat-card::after{
-    z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 15px;
-  right: 10px;
-  left: auto;
-  width: 50%;
-  top: 80%;
-  max-width:300px;
-  background:  #1c4c74;
-  -webkit-box-shadow: 0 15px 10px  #1c4c74;
-  -moz-box-shadow: 0 15px 10px  #1c4c74;
-  box-shadow: 0 15px 10px  #1c4c74;
-  -webkit-transform: rotate(3deg);
-  -moz-transform: rotate(3deg);
-  -o-transform: rotate(3deg);
-  -ms-transform: rotate(3deg);
-  transform: rotate(3deg);
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
 }
-// ======================================================
+
 .header-box {
   width: 100%;
   margin: auto;
   text-align: center;
 }
+
 .header-box form a {
   position: relative;
   display: inline-block;
@@ -90,10 +53,12 @@ highcharts-chart{
   margin-top: 1.5rem;
   letter-spacing: 4px
 }
+
 .header-box a span {
   position: absolute;
   display: block;
 }
+
 .header-box a span:nth-child(1) {
   top: 0;
   left: -100%;
@@ -102,14 +67,7 @@ highcharts-chart{
   background: linear-gradient(90deg, transparent, #1c4c74);
   animation: btn-anim1 2s linear infinite;
 }
-@keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-  50%,100% {
-    left: 100%;
-  }
-}
+
 .header-box a span:nth-child(2) {
   top: -100%;
   right: 0;
@@ -119,14 +77,7 @@ highcharts-chart{
   animation: btn-anim2 2s linear infinite;
   animation-delay: 1.25s
 }
-@keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-  50%,100% {
-    top: 100%;
-  }
-}
+
 .header-box a span:nth-child(3) {
   bottom: 0;
   right: -100%;
@@ -136,14 +87,7 @@ highcharts-chart{
   animation: btn-anim3 2s linear infinite;
   animation-delay: 1.5s
 }
-@keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-  50%,100% {
-    right: 100%;
-  }
-}
+
 .header-box a span:nth-child(4) {
   bottom: -100%;
   left: 0;
@@ -152,29 +96,4 @@ highcharts-chart{
   background: linear-gradient(360deg, transparent, #1c4c74);
   animation: btn-anim4 2s linear infinite;
   animation-delay: 1.75s
-}
-@keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,100% {
-    bottom: 100%;
-  }
-}
-mat-card-header{
-  .material-icons{
-    line-height: unset !important;
-  }
-}
-.mat-card{
-  padding-bottom: 0;
-}
-.mat-card-title{
-  font-weight: 400;
-} 
-.mat-card-content{
-  margin-top: 20px;
-}
-mat-form-field{
-  margin-right: 20px;
 }
