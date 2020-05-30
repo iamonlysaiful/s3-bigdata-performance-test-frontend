@@ -6,12 +6,12 @@
     <mat-divider></mat-divider>
     <mat-card-content class="chart-card">
         <div fxLayout="row" fxLayoutAlign="center center" fxFlex="98">
-            <mat-progress-spinner mode="indeterminate" class="spinner-border" *ngIf="spinnerClass!==''">
+            <mat-progress-spinner mode="indeterminate" class="spinner-border" *ngIf="spinnerClass!=='end'">
             </mat-progress-spinner>
-            <div class="spinner-overlay" *ngIf="spinnerClass!==''"></div>
+            <div class="spinner-overlay" *ngIf="spinnerClass!=='end'"></div>
             <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions" [style.display]="displayChart()">
             </highcharts-chart>
-            <span class="please-wait" *ngIf="spinnerClass!==''">Loading... Please wait! </span>
+            <span class="please-wait" *ngIf="spinnerClass!=='end'">Loading... Please wait! </span>
         </div>
     </mat-card-content>
 </mat-card>

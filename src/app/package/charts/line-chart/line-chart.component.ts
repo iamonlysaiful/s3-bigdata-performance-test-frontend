@@ -55,7 +55,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   }
 
   displayChart() {
-    if (this.spinnerClass !== '') {
+    if (this.spinnerClass !== 'end') {
       return 'none'
     }
   }

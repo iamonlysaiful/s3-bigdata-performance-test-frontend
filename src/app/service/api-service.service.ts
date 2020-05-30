@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ApolloQueryResult } from 'apollo-client';
 import { Response } from '../models/response';
+// import { onError } from 'apollo-link-error';
 
 @Injectable({
   providedIn: 'root'

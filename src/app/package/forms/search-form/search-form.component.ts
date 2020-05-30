@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiServiceService } from 'src/app/service/api-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-search-form',
@@ -16,7 +17,10 @@ export class SearchFormComponent implements OnInit {
 
   @Output() clickRequest = new EventEmitter();
 
-  constructor(private api: ApiServiceService, private fb: FormBuilder) {
+  constructor(private api: ApiServiceService, private fb: FormBuilder,private _snackbar:MatSnackBar) {
+    // this._snackbar.open('Error!!', 'End now', {
+    //   duration: 500
+    // });
     this.searchForm = this.fb.group({
       buildingId: ['', Validators.required],
       objectId: ['', Validators.required],
