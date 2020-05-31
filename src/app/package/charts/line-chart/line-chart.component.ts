@@ -25,6 +25,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   }];
   chartOptions: any;
   highcharts = Highcharts;
+  maxDistance = 24 * 3600 * 1000;
 
   constructor() { }
 
@@ -155,6 +156,19 @@ export class LineChartComponent implements OnInit, OnChanges {
           afterSetExtremes: function (e) {
             var chart = Highcharts.charts[0];
             chart.showLoading('Loading data from server...');
+
+            if (e.trigger === undefined) {
+              this.maxDistance = this.maxDistance === undefined ? 24 * 3600 * 1000 : this.maxDistance;
+              var xaxis = this;
+              if ((e.dataMax - e.dataMin) > this.maxDistance) {
+                var min = e.dataMin;
+                var max = e.dataMin + this.maxDistance;
+                window.setTimeout(function () {
+                  xaxis.setExtremes(min, max);
+                }, 1);
+              }
+            }
+
             chart.hideLoading();
           }
         },
