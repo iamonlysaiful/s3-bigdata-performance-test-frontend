@@ -1,4 +1,4 @@
-# An Analysis on Bigdata Pulling Performance 
+# An Analysis on Big Data Pulling Performance 
 
 ## Tools
 
@@ -49,21 +49,21 @@ Here is my Project Structure:
 Here **app** is the parent module of all module. It holds all other modules and their components on it
 
 #### main
-**main** is the only sub-module here. Actually it holds main componenet of project. By created this module 
+**main** is the only sub-module here. Actually it holds main component of project. By created this module 
 I tried to portray the pattern of **Lazy Loading Routes** 
 
 #### models
 It holds all typescript models. and **query** holds all graphql queries typescript models 
 
 #### package
-It holds all dynamic componenets e.g. **charts**,**forms**, Which can reuse all over the project. By these I focused **Component Interaction** 
+It holds all dynamic components e.g. **charts**,**forms**, Which can reuse all over the project. By these I implement **Component Interaction** 
 over Project.
  
 #### service
 Here I included my api related service and other reusable or utility type functionality to increase **Modularity**.
 
 #### graphql.module.ts
-This module.ts generally hold graphql-appolo client configuration for angular globally.
+This module.ts generally hold graphql-apollo client configuration for angular globally.
 I also included **Global Error Interceptor** here.
 
 ## Screenshots
