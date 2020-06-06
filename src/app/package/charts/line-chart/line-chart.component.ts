@@ -46,32 +46,25 @@ export class LineChartComponent implements OnInit, OnChanges {
       debugger
       this.chartDateRange = this.readingData.chartDateRange;
       this.getChart(this.readingData.chartData);
-      //this.selectedSize='1';
+      if (this.readingData.chartData.size<Number(this.selectedSize)) {
+        this.pageSizeSelectionChange({ activePage: 1, size: 1 });
+        this.selectedSize = '1';
+      }
     }
   }
-
-  //total: number = 1;
-  //size: number = 1;
 
   displayActivePage(event) {
     this.pageChangeRequest.emit(event);
   }
 
   pageSizeSelectionChange(event) {
-    //debugger
-    //this.spinnerClass='start'
     this.selectedSize = event.size;
-    //this.size = event.size;
     this.sizeChangeRequest.emit(event);
-    //this.spinnerClass='end'
   }
 
   getChart(res) {
-    //this.total = res.pageCount;
     this.totalPage = res.pageCount;
-    //this.size = res.size;
     this.readingSeries = [];
-
     for (let index = 0; index < res.data.length; index++) {
       const element = res.data[index];
       this.readingSeries.push({

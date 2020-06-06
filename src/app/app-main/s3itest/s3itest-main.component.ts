@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import * as moment from 'moment';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 
-
 @Component({
   selector: 'app-s3itest-main',
   templateUrl: './s3itest-main.component.html',
@@ -38,7 +37,7 @@ export class S3itestMainComponent {
 
   searchClick(event) {
     this.searchData = event;
-    this.getReadingData(this.searchData, this.size, this.page);
+    this.getReadingData(this.searchData, 1, 1);
   }
 
   async onChartPageChange(event) {
