@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 export const routes: Routes = [
   {
       path: '',
-      loadChildren: () => import('./../app/main/s3itest.module').then(m => m.S3itestModule)
+      loadChildren: () => import('./../app/app-main/app-main.module').then(m => m.AppMainModule)
   }
 ];
 

@@ -17,10 +17,7 @@ export class SearchFormComponent implements OnInit {
 
   @Output() clickRequest = new EventEmitter();
 
-  constructor(private api: ApiServiceService, private fb: FormBuilder,private _snackbar:MatSnackBar) {
-    // this._snackbar.open('Error!!', 'End now', {
-    //   duration: 500
-    // });
+  constructor(private api: ApiServiceService, private fb: FormBuilder, private _snackbar: MatSnackBar) {
     this.searchForm = this.fb.group({
       buildingId: ['', Validators.required],
       objectId: ['', Validators.required],
@@ -42,11 +39,13 @@ export class SearchFormComponent implements OnInit {
       this.buildingList = res.data.bQuery.buildings;
     });
   }
+
   getObjectsDD() {
     this.api.getObjectsForDD().subscribe((res) => {
       this.objectList = res.data.objQuery.objects;
     });
   }
+
   getDataFieldsDD() {
     this.api.getDataFieldsForDD().subscribe((res) => {
       this.dfList = res.data.dfieldQuery.datafields;

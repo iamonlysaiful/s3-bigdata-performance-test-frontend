@@ -1,8 +1,14 @@
-export class Reading{
-    value:number[];
-    timestamp:Date[];
-    buildingName:string;
-    objectName:string;
-    dataFieldName:string;
+export class Reading {
+    pageCount: number;
+    size: number;
+    totalCount: number;
+    data: Data[];
 
+}
+
+export class Data {
+    value: number[];
+    timestamp: Date[];
+    buildingName: string;
+    datapointName: string;
 }

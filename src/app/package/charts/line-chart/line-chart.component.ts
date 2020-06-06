@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import * as Highcharts from 'highcharts/highstock';
 require('highcharts/modules/no-data-to-display')(Highcharts);
 require('highcharts/modules/boost')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 import * as _ from 'underscore';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-line-chart',
@@ -11,48 +12,89 @@ import * as _ from 'underscore';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit, OnChanges {
-  @Input() chartData: any;
+  @Input() readingData: any;
   @Input() spinnerClass: any;
+  @Output() pageChangeRequest = new EventEmitter();
+  @Output() sizeChangeRequest = new EventEmitter();
 
   readingSeries = [{
-    name: '', data: [],
+    name: '',
+    data: [],
     turboThreshold: 1,
     color: '#1c4c74',
     lineWidth: 1,
     dataGrouping: {
       enabled: false
-    }
+    },
+    type: 'line'
   }];
   chartOptions: any;
   highcharts = Highcharts;
   maxDistance = 24 * 3600 * 1000;
-
+  selectedSize = '1';
+  totalPage = 1;
+  color: string[] = ['#1c4c74', '#800080', '#008000', '#FF0000', '#800000']
+  chartDateRange = [new Date(2018, 4, 10, 0, 0), new Date(2018, 4, 12, 23, 59)];
   constructor() { }
 
   ngOnInit(): void {
-    this.generateReadingChart(this.readingSeries);
+    this.generateReadingChart(this.readingSeries, false);
   }
 
   ngOnChanges() {
-    if (this.chartData !== undefined) {
-      this.getChartData(this.chartData);
+    if (this.readingData !== undefined) {
+      debugger
+      this.chartDateRange = this.readingData.chartDateRange;
+      this.getChart(this.readingData.chartData);
+      //this.selectedSize='1';
     }
   }
 
-  getChartData(data) {
+  //total: number = 1;
+  //size: number = 1;
+
+  displayActivePage(event) {
+    this.pageChangeRequest.emit(event);
+  }
+
+  pageSizeSelectionChange(event) {
+    //debugger
+    //this.spinnerClass='start'
+    this.selectedSize = event.size;
+    //this.size = event.size;
+    this.sizeChangeRequest.emit(event);
+    //this.spinnerClass='end'
+  }
+
+  getChart(res) {
+    //this.total = res.pageCount;
+    this.totalPage = res.pageCount;
+    //this.size = res.size;
     this.readingSeries = [];
-    this.readingSeries.push({
-      name: data.objectName + ' ' + data.dataFieldName,
-      data: _.zip(data.timestamp, data.value),
-      //type: "line",
-      turboThreshold: Infinity,
-      color: '#1c4c74',
-      lineWidth: 1,
-      dataGrouping: {
-        enabled: false
-      }
-    });
-    this.generateReadingChart(this.readingSeries);
+
+    for (let index = 0; index < res.data.length; index++) {
+      const element = res.data[index];
+      this.readingSeries.push({
+        name: element.datapointName,
+        data: _.zip(
+          _.sortBy(element.timestamp, function (date) {
+            return date;
+          }),
+          _.sortBy(element.value, function (value) {
+            return value;
+          })
+        ),
+        turboThreshold: Infinity,
+        color: this.color[index],
+        lineWidth: 1,
+        dataGrouping: {
+          enabled: false
+        },
+        type: 'line'
+      });
+    }
+    this.generateReadingChart(this.readingSeries, true);
+
   }
 
   displayChart() {
@@ -61,7 +103,8 @@ export class LineChartComponent implements OnInit, OnChanges {
     }
   }
 
-  generateReadingChart(series, data = null) {
+  generateReadingChart(series, legendView) {
+
     this.chartOptions = {
       chart: {
         type: "line",
@@ -82,9 +125,7 @@ export class LineChartComponent implements OnInit, OnChanges {
       navigator: {
         enabled: true,
         adaptToUpdatedData: true,
-        series: {
-          data: series[0].data,
-        }
+        series: series
       },
       rangeSelector: {
         enabled: true,
@@ -122,7 +163,6 @@ export class LineChartComponent implements OnInit, OnChanges {
           type: 'all',
           text: 'all'
         }],
-        //selected:1,
         inputEnabled: false,
         style: {
           fontWeight: 'normal',
@@ -156,19 +196,6 @@ export class LineChartComponent implements OnInit, OnChanges {
           afterSetExtremes: function (e) {
             var chart = Highcharts.charts[0];
             chart.showLoading('Loading data from server...');
-
-            if (e.trigger === undefined) {
-              this.maxDistance = this.maxDistance === undefined ? 24 * 3600 * 1000 : this.maxDistance;
-              var xaxis = this;
-              if ((e.dataMax - e.dataMin) > this.maxDistance) {
-                var min = e.dataMin;
-                var max = e.dataMin + this.maxDistance;
-                window.setTimeout(function () {
-                  xaxis.setExtremes(min, max);
-                }, 1);
-              }
-            }
-
             chart.hideLoading();
           }
         },
@@ -185,9 +212,7 @@ export class LineChartComponent implements OnInit, OnChanges {
       },
       tooltip: {
         formatter: function () {
-          return '<b>' + this.series.name + '</b><br/>' +
-            'Date: ' + Highcharts.dateFormat('%e-%b-%Y %l:%M %p', this.point.category)
-            + ', Value: ' + this.y;
+          return moment.utc(this.point.category).format('DD/MM/YY HH:mm') + " hrs<br/>" + this.series.name + " " + Highcharts.numberFormat(this.y, 2, '.', ',');
         }
       },
       lang: {
@@ -201,6 +226,17 @@ export class LineChartComponent implements OnInit, OnChanges {
           color: '#1c4c74'
         }
       },
+      legend: {
+        enabled: legendView,
+        layout: 'horizontal',
+        x: 30,
+        align: 'center',
+        verticalAlign: 'bottom',
+        borderWidth: 2,
+        itemStyle: {
+          fontWeight: 'normal'
+        },
+      },
       plotOptions: {
         series: {
           shadow: false,
@@ -210,7 +246,6 @@ export class LineChartComponent implements OnInit, OnChanges {
       series: series
     };
   }
-
 
 
 }

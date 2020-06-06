@@ -35,7 +35,7 @@
             <owl-date-time #dtPicker3></owl-date-time>
           </mat-form-field>
           <button fxFlex="35" mat-raised-button type="submit" color="primary" (click)="onClick()"
-            [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null">
+            [disabled]="!searchForm.valid ||searchForm.get('daterange').value[1]==null || (searchForm.get('objectId').value==0 && searchForm.get('datafieldId').value==0)">
             <mat-icon>search</mat-icon>
             <mat-label>Search</mat-label>
           </button>

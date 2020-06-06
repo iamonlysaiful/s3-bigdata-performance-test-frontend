@@ -15,7 +15,6 @@ body{
     margin: 1.5rem;
 }
 
-
 .mat-card::after{
   z-index: -1;
   position: absolute;
@@ -59,4 +58,11 @@ mat-card-header{
 
 mat-form-field{
   margin-right: 20px;
+}
+
+.custom-toolbar{
+
+  .mat-form-field-infix{
+      width:75px !important;
+  }
 }

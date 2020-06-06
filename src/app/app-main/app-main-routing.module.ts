@@ -23,4 +23,4 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class S3itestRoutingModule { }
+export class AppMainRoutingModule { }
