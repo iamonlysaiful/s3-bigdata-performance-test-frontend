@@ -74,14 +74,7 @@ export class LineChartComponent implements OnInit, OnChanges {
       const element = res.data[index];
       this.readingSeries.push({
         name: element.datapointName,
-        data: _.zip(
-          _.sortBy(element.timestamp, function (date) {
-            return date;
-          }),
-          _.sortBy(element.value, function (value) {
-            return value;
-          })
-        ),
+        data: _.zip(element.timestamp,element.value),
         turboThreshold: Infinity,
         boostThreshold: Infinity,
         color: this.color[index],
