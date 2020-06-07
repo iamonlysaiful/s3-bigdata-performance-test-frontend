@@ -13,14 +13,15 @@ import * as moment from 'moment';
 })
 export class LineChartComponent implements OnInit, OnChanges {
   @Input() readingData: any;
-  @Input() spinnerClass: any;
   @Output() pageChangeRequest = new EventEmitter();
   @Output() sizeChangeRequest = new EventEmitter();
 
+  spinnerClass: any = 'end';
   readingSeries = [{
     name: '',
     data: [],
     turboThreshold: 1,
+    boostThreshold: 1,
     color: '#1c4c74',
     lineWidth: 1,
     dataGrouping: {
@@ -30,11 +31,12 @@ export class LineChartComponent implements OnInit, OnChanges {
   }];
   chartOptions: any;
   highcharts = Highcharts;
-  maxDistance = 24 * 3600 * 1000;
   selectedSize = '1';
   totalPage = 1;
   color: string[] = ['#1c4c74', '#800080', '#008000', '#FF0000', '#800000']
   chartDateRange = [new Date(2018, 4, 10, 0, 0), new Date(2018, 4, 12, 23, 59)];
+  counter = 1;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -43,21 +45,24 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.readingData !== undefined) {
-      debugger
+      this.spinnerClass = 'start'
       this.chartDateRange = this.readingData.chartDateRange;
       this.getChart(this.readingData.chartData);
-      if (this.readingData.chartData.size<Number(this.selectedSize)) {
+      if (this.readingData.chartData.size < Number(this.selectedSize)) {
         this.pageSizeSelectionChange({ activePage: 1, size: 1 });
         this.selectedSize = '1';
       }
+
     }
   }
 
   displayActivePage(event) {
+    this.spinnerClass = 'start'
     this.pageChangeRequest.emit(event);
   }
 
   pageSizeSelectionChange(event) {
+    this.spinnerClass = 'start'
     this.selectedSize = event.size;
     this.sizeChangeRequest.emit(event);
   }
@@ -78,10 +83,11 @@ export class LineChartComponent implements OnInit, OnChanges {
           })
         ),
         turboThreshold: Infinity,
+        boostThreshold: Infinity,
         color: this.color[index],
         lineWidth: 1,
         dataGrouping: {
-          enabled: false
+          enabled: true
         },
         type: 'line'
       });
@@ -107,6 +113,7 @@ export class LineChartComponent implements OnInit, OnChanges {
         }
       },
       boost: {
+        enabled: true,
         seriesThreshold: Infinity,
         useGPUTranslations: false,
         useAlpha: false,
@@ -160,7 +167,7 @@ export class LineChartComponent implements OnInit, OnChanges {
         style: {
           fontWeight: 'normal',
           color: '#1c4c74'
-        }
+        },
       },
       title: {
         text: ""
@@ -190,6 +197,7 @@ export class LineChartComponent implements OnInit, OnChanges {
             var chart = Highcharts.charts[0];
             chart.showLoading('Loading data from server...');
             chart.hideLoading();
+
           }
         },
       },
@@ -234,11 +242,13 @@ export class LineChartComponent implements OnInit, OnChanges {
         series: {
           shadow: false,
           turboThreshold: Infinity,
+          boostThreshold: Infinity
         }
       },
       series: series
     };
+    setTimeout(() => {
+      this.spinnerClass = 'end'
+    }, 500);
   }
-
-
 }

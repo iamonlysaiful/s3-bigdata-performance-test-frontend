@@ -7,12 +7,10 @@ import { FormControl } from '@angular/forms';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnChanges,OnInit {
+export class PaginationComponent implements OnChanges, OnInit {
 
   constructor() { }
-  
-  //@Input() totalRecords: number = 0;
-  //@Input() recordsPerPage: number = 0;
+
   @Input() selectedPageSize: number = 1;
   @Input() chartDateRange: any;
   @Input() pageCount: number = 1;
@@ -25,10 +23,11 @@ export class PaginationComponent implements OnChanges,OnInit {
     { value: '1', viewValue: '1 Day' },
   ];
   position = new FormControl('above');
+
   ngOnInit(): void {
-    
     this.onPageChange.emit({ activePage: 1, size: this.selectedPageSize });
   }
+
   ngOnChanges() {
     this.page = this.pageCount;
     this.activePage = 1;
@@ -36,7 +35,6 @@ export class PaginationComponent implements OnChanges,OnInit {
   }
 
   populateSize() {
-    console.log(this.selectedPageSize);
     var a = moment(this.chartDateRange[0]);
     var b = moment(this.chartDateRange[1]);
     let diff = b.diff(a, 'days');
@@ -56,25 +54,12 @@ export class PaginationComponent implements OnChanges,OnInit {
     if (diff >= 1) {
       this.sizes.push({ value: '1', viewValue: '1 Day' });
     }
-
   }
 
   selectionSizeChange(selectedSize) {
     this.selectedPageSize = selectedSize;
     this.onSelectionChange.emit({ activePage: 1, size: selectedSize });
     this.activePage = 1;
-  }
-
-  private getArrayOfPage(pageCount: number): number[] {
-    let pageArray: number[] = [];
-
-    if (pageCount > 0) {
-      for (var i = 1; i <= pageCount; i++) {
-        pageArray.push(i);
-      }
-    }
-
-    return pageArray;
   }
 
   onClickPage(pageNumber: number) {

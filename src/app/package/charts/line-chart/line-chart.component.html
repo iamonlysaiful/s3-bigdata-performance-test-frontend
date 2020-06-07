@@ -12,14 +12,13 @@
             <div class="spinner-overlay" *ngIf="spinnerClass!=='end'"></div>
             <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions" [oneToOne] = "true" [style.display]="displayChart()">
             </highcharts-chart>
-            <span class="please-wait" *ngIf="spinnerClass!=='end'">Loading... Please wait! </span>
+            <span class="please-wait" *ngIf="spinnerClass!=='end'">Loading... Please wait!  </span>
 
         </div>
 
     </mat-card-content>
     <mat-card-footer>
-      <app-pagination fxLayout="row" fxLayoutAlign="center center" fxFlex  [selectedPageSize]="selectedSize"  [chartDateRange]="chartDateRange" [pageCount]="totalPage" (onPageChange)="displayActivePage($event)" (onSelectionChange)="pageSizeSelectionChange($event)"
+      <app-pagination fxLayout="row" fxLayoutAlign="center center" fxFlex [style.display]="displayChart()"  [selectedPageSize]="selectedSize"  [chartDateRange]="chartDateRange" [pageCount]="totalPage" (onPageChange)="displayActivePage($event)" (onSelectionChange)="pageSizeSelectionChange($event)"
             ></app-pagination> 
-            <!--[totalRecords]="total" [recordsPerPage]="size" -->
     </mat-card-footer>
 </mat-card>

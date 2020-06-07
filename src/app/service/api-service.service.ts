@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ApolloQueryResult } from 'apollo-client';
 import { Response } from '../models/response';
-import { query } from '@angular/animations';
 // import { onError } from 'apollo-link-error';
 
 @Injectable({
@@ -53,23 +52,7 @@ export class ApiServiceService {
     });
   }
 
-  // getReadingData(buildingId:number,objectId:number,datafieldId:number,startTime:string,endTime:string): Observable<ApolloQueryResult<Response>> {
-  //   return this.apollo.query({
-  //     query: gql`{
-  //       readingQuery {
-  //         readings(buildingId: ${buildingId}, objectId: ${objectId}, datafieldId: ${datafieldId}, startTime: "${startTime}", endTime:  "${endTime}") {
-  //           timestamp
-  //           value
-  //           buildingName
-  //           objectName
-  //           dataFieldName
-  //         }
-  //       }
-  //     }`
-  //   });
-  // }
-  getReadingData(buildingId: number, objectId: number | null, datafieldId: number | null, startTime: string, endTime: string, page:number, size:number): Observable<ApolloQueryResult<Response>> {
-    console.log(objectId);
+  getReadingData(buildingId: number, objectId: number | null, datafieldId: number | null, startTime: string, endTime: string, page: number, size: number): Observable<ApolloQueryResult<Response>> {
     return this.apollo.query({
       query: gql`{
         readingQuery {
@@ -86,7 +69,6 @@ export class ApiServiceService {
           }
         }
       }`
-      
     });
   }
 

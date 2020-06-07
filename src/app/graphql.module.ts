@@ -11,31 +11,33 @@ import { SnackbarService } from './service/snackbar.service';
   providers: [],
 })
 export class GraphQLModule {
-  constructor(private apollo: Apollo, private httpLink: HttpLink,private snackbar:SnackbarService) { 
+  constructor(private apollo: Apollo, private httpLink: HttpLink, private snackbar: SnackbarService) {
     const errorlink = onError(({ graphQLErrors, networkError }) => {
-      if(graphQLErrors){
-        graphQLErrors.map(({ message, locations, path }) => {  
+      if (graphQLErrors) {
+        graphQLErrors.map(({ message, locations, path }) => {
           this.snackbar.open(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
-          //console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
         })
       }
-      if(networkError){
-          this.snackbar.open(`[Network error]: ${networkError.message}`);
-          //console.log(`[Network error]: ${networkError}`);
+      if (networkError) {
+        this.snackbar.open(`[Network error]: ${networkError.message}`);
       }
     });
 
     this.apollo.create(
       {
-        link : ApolloLink.from([errorlink, this.httpLink.create({ uri: "http://localhost:58719/graphql" })]) ,
+        link: ApolloLink.from([errorlink, this.httpLink.create({ uri: "http://localhost:58719/graphql" })]),
         cache: new InMemoryCache(),
-        defaultOptions : {
-          watchQuery : {
-            fetchPolicy : 'network-only',
-            errorPolicy : 'all'
-          }
+        defaultOptions: {
+          watchQuery: {
+            fetchPolicy: 'no-cache',
+            errorPolicy: 'all'
+          },
+          query: {
+            fetchPolicy: 'no-cache',
+            errorPolicy: 'all',
+          },
         }
       }
-    );  
+    );
   }
 }

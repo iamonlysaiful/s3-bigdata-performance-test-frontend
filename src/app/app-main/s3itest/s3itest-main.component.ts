@@ -11,7 +11,6 @@ export class S3itestMainComponent {
 
   title = 'S3 Internal Test';
   readingData: any;
-  spinner: string = 'end';
   size = 1;
   page = 1;
   initPage = 1;
@@ -19,9 +18,7 @@ export class S3itestMainComponent {
 
   constructor(private api: ApiServiceService) { }
 
-  //==========================reading api call============
-  async getReadingData(searchData, size, page) {
-    this.spinner = 'start';
+  getReadingData(searchData, size, page) {
     let data = searchData;
     const startTime = moment(data.daterange[0]).format("DD-MM-YYYYhh-mm-ss-A");
     const endTime = moment(data.daterange[1]).format("DD-MM-YYYYhh-mm-ss-A");
@@ -30,9 +27,7 @@ export class S3itestMainComponent {
         chartData: res.data.readingQuery.readings,
         chartDateRange: data.daterange
       };
-      this.spinner = 'end';
     });
-    return await this.spinner;
   }
 
   searchClick(event) {
@@ -43,20 +38,14 @@ export class S3itestMainComponent {
   async onChartPageChange(event) {
     if (this.searchData !== undefined) {
       this.page = event.activePage;
-      let x = await this.getReadingData(this.searchData, this.size, event.activePage);
-      if (x == 'start') {
-        this.spinner = 'end'
-      }
+      this.getReadingData(this.searchData, this.size, event.activePage);
     }
   }
 
   async onChartPagesizeChangeRequest(event) {
     if (this.searchData !== undefined) {
       this.size = event.size;
-      let x = await this.getReadingData(this.searchData, event.size, this.initPage);
-      if (x == 'start') {
-        this.spinner = 'end'
-      }
+      this.getReadingData(this.searchData, event.size, this.initPage);
     }
   }
 }
