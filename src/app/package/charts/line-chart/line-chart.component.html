@@ -18,7 +18,7 @@
 
     </mat-card-content>
     <mat-card-footer>
-      <app-pagination fxLayout="row" fxLayoutAlign="center center" fxFlex [style.display]="displayChart()"  [selectedPageSize]="selectedSize"  [chartDateRange]="chartDateRange" [pageCount]="totalPage" (onPageChange)="displayActivePage($event)" (onSelectionChange)="pageSizeSelectionChange($event)"
-            ></app-pagination> 
+      <app-pagination  [style.display]="displayChart()"  [selectedPageSize]="selectedSize"  [chartDateRange]="chartDateRange" [pageCount]="totalPage" (onPageChange)="displayActivePage($event)" (onSelectionChange)="pageSizeSelectionChange($event)"
+      ></app-pagination> 
     </mat-card-footer>
 </mat-card>

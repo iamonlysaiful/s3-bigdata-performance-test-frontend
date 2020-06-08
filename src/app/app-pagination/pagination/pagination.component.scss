@@ -11,3 +11,8 @@ mat-toolbar{
 .page-length-label{
     margin-right: 5px;
 }
+@media only screen and (max-width:768px){
+    mat-toolbar{
+        height: 164px;
+    }
+}

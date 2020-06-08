@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    FlexLayoutModule,
+    
     MatListModule,
     MatToolbarModule,
     MatButtonModule,
@@ -26,6 +29,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     PaginationComponent,
+    FlexLayoutModule,
+
     MatListModule,
     MatToolbarModule,
     MatButtonModule,

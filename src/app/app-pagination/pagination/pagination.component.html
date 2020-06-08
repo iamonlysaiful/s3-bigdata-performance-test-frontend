@@ -1,4 +1,5 @@
-<mat-toolbar class="custom-toolbar">
+<mat-toolbar class="custom-toolbar" fxLayout="row" fxLayoutAlign="left center" fxFlex fxLayout.xs="column" fxLayout.md="row"
+  fxLayout.lt-md="column">
   <mat-label class="range-label"> Select range for data: </mat-label>
   <mat-form-field>
     <mat-select [ngModel]="selectedPageSize" name="selectedSize" #selected
@@ -9,20 +10,24 @@
     </mat-select>
   </mat-form-field>
   <mat-label class="page-length-label"> Data fetching from, Page: <b>{{activePage}}</b> of <b>{{page}}</b> </mat-label>
-  <button mat-icon-button [disabled]="activePage ==1" (click)="onClickPage(1)" #tooltip="matTooltip"
-    matTooltip="First Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
-    <mat-icon>first_page</mat-icon>
-  </button>
-  <button mat-icon-button [disabled]="activePage ==1" (click)="onClickPage(activePage - 1)" #tooltip="matTooltip"
-    matTooltip="Previous Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
-    <mat-icon>navigate_before</mat-icon>
-  </button>
-  <button mat-icon-button [disabled]="activePage ==page" (click)="onClickPage(activePage + 1)" #tooltip="matTooltip"
-    matTooltip="Next Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
-    <mat-icon>navigate_next</mat-icon>
-  </button>
-  <button mat-icon-button [disabled]="activePage ==page ||selectedPageSize==undefined" (click)="onClickPage(pageCount)" #tooltip="matTooltip"
-    matTooltip="Last Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
-    <mat-icon>last_page</mat-icon>
-  </button>
+  <div>
+    <button mat-icon-button [disabled]="activePage ==1" (click)="onClickPage(1)" #tooltip="matTooltip"
+      matTooltip="First Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
+      <mat-icon>first_page</mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="activePage ==1" (click)="onClickPage(activePage - 1)" #tooltip="matTooltip"
+      matTooltip="Previous Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="activePage ==page" (click)="onClickPage(activePage + 1)" #tooltip="matTooltip"
+      matTooltip="Next Page" [matTooltipPosition]="position.value" matTooltipHideDelay="100">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="activePage ==page ||selectedPageSize==undefined"
+      (click)="onClickPage(pageCount)" #tooltip="matTooltip" matTooltip="Last Page"
+      [matTooltipPosition]="position.value" matTooltipHideDelay="100">
+      <mat-icon>last_page</mat-icon>
+    </button>
+  </div>
+
 </mat-toolbar>
