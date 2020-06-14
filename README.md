@@ -109,6 +109,7 @@ N.B. ***Weekly** grouped for **6 Month Range** & **Monthly** grouped for **1 Yea
 **Healthy Baseline Implemented for System Efficiency & System Cooling Load**
 
 N.B. *Greater than 0.45 is healthy for **System Efficency** Less than 400k is healthy for **System Cooling Load**.*
+If needed can change range dynamically from **line-chart.component.ts** & variable name is **baselineList**
 ![Image of Project Structure](src/assets/images/img-5.png)
 
 **Responsive UI**
