@@ -12,7 +12,7 @@ export class PaginationComponent implements OnChanges, OnInit {
   constructor() { }
 
   @Input() selectedPageSize: number = 1;
-  @Input() chartDateRange: any;
+  @Input() chartDateCount: any=1;
   @Input() pageCount: number = 1;
   @Output() onPageChange: EventEmitter<object> = new EventEmitter();
   @Output() onSelectionChange: EventEmitter<object> = new EventEmitter();
@@ -35,9 +35,10 @@ export class PaginationComponent implements OnChanges, OnInit {
   }
 
   populateSize() {
-    var a = moment(this.chartDateRange[0]);
-    var b = moment(this.chartDateRange[1]);
-    let diff = b.diff(a, 'days');
+    // var a = moment(this.chartDateRange[0]);
+    // var b = moment(this.chartDateRange[1]);
+    // let diff = b.diff(a, 'days');
+     let diff = this.chartDateCount;
     this.sizes = [];
     if (diff >= 365) {
       this.sizes.push({ value: '365', viewValue: '1 Year' });

@@ -1,2 +1,2 @@
 <app-search-form (clickRequest)="searchClick($event)"></app-search-form>
-<app-line-chart [readingData]="readingData" (pageChangeRequest)="onChartPageChange($event)" (sizeChangeRequest)="onChartPagesizeChangeRequest($event)"></app-line-chart>
+<app-line-chart [readingData]="readingData" (pageChangeRequest)="onChartPageChange($event)" (sizeChangeRequest)="onChartPagesizeChangeRequest($event)" (LazyLoadRequest)="onLazyLoadRequest($event)"></app-line-chart>
