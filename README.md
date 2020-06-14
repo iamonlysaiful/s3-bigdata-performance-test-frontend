@@ -75,15 +75,19 @@ I also included **Global Error Interceptor** here.
 
 > Material Design,
 
+> Higstock chart
+
 > Reactive Form validation, 
 
 > Component Interaction
 
 > Lazy routing
 
+> Pagination on highchart
+
 > Reusable component
 
-> Higstock chart
+
 
 #### Screenshots
 
