@@ -35,14 +35,12 @@ export class LineChartComponent implements OnInit, OnChanges {
   highcharts = Highcharts;
   selectedSize = '1';
   totalPage = 1;
-  // color: string[] = ['#1c4c74', '#800080', '#008000', '#FFBD33', '#75FF33', '#33FFBD', '#F45B5B', '#F7A35C', '#F45B5B', '#AA33FF', '#FF0000']
   color: string[] = ['#1c4c74', "#ff349a", '#0000ff', "#644c00", "#e66914", "#48ffff", "#008200", "#da00da", "#595959", "#5700ad", '#FF0000']
   baselineList = [
     { name: 'System Efficiency', value: 0.45, type: 'less' },
     { name: 'System Cooling Load', value: 400000, type: 'greater' },
   ]
   chartDateCount: number = 1;
-  //chartDateRange = [new Date(2018, 4, 10, 0, 0), new Date(2018, 4, 12, 23, 59)];
   counter = 1;
 
   constructor() { }
@@ -54,7 +52,6 @@ export class LineChartComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.readingData !== undefined) {
       this.spinnerClass = 'start'
-      //this.chartDateRange = this.readingData.chartDateRange;
       this.getChart(this.readingData);
       if (this.readingData.size < Number(this.selectedSize)) {
         this.pageSizeSelectionChange({ activePage: 1, size: 1 });
@@ -101,14 +98,6 @@ export class LineChartComponent implements OnInit, OnChanges {
           });
         }
       }
-      // else if (element.datapointName == 'System Cooling Load') {
-      //   zoneData.push({
-      //     value: 400000,
-      //     color: this.color[index]
-      //   }, {
-      //     color: this.color[this.color.length - 1]
-      //   });
-      // }
       this.readingSeries.push({
         name: element.datapointName,
         data: _.zip(element.timestamp, element.value),
@@ -186,6 +175,11 @@ export class LineChartComponent implements OnInit, OnChanges {
           text: '1m'
         },
         {
+          type: 'month',
+          count: 6,
+          text: '6m'
+        },
+        {
           type: 'year',
           count: 1,
           text: '1y'
@@ -224,16 +218,13 @@ export class LineChartComponent implements OnInit, OnChanges {
           }
         },
         events: {
-          afterSetExtremes: (e) => {
-            this.afterSetExtremes(e);
-          } 
-          //this.afterSetExtremes
-          // function (e) {
-          //   var chart = Highcharts.charts[0];
-          //   chart.showLoading('Loading data from server...');
-          //   chart.hideLoading();
+          afterSetExtremes: 
+          function (e) {
+            var chart = Highcharts.charts[0];
+            chart.showLoading('Loading data from server...');
+            chart.hideLoading();
 
-          // }
+          }
         },
       },
       yAxis: {
@@ -243,23 +234,17 @@ export class LineChartComponent implements OnInit, OnChanges {
             fontWeight: 'normal',
             fontSize: '14px',
             color: '#1c4c74'
+          },
+          labels:{
+            formatter: function () {
+              return Highcharts.numberFormat(this.value, 4, '.', ','); 
+          }
           }
         },
-        //   plotLines: [{
-        //     value: 400,
-        //     color: 'red',
-        //     dashStyle: 'solid',
-        //     width: 2
-        // }, {
-        //     value: 0.59,
-        //     color: 'red',
-        //     dashStyle: 'solid',
-        //     width: 2
-        // }]
       },
       tooltip: {
         formatter: function () {
-          return moment.utc(this.point.category).format('DD/MM/YY HH:mm') + " hrs<br/>" + this.series.name + " " + Highcharts.numberFormat(this.y, 2, '.', ',');
+          return moment.utc(this.point.category).format('DD/MM/YY HH:mm') + " hrs<br/>" + this.series.name + " " + Highcharts.numberFormat(this.y, 4, '.', ',');
         }
       },
       lang: {
@@ -296,23 +281,5 @@ export class LineChartComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.spinnerClass = 'end'
     }, 500);
-  }
-
-  afterSetExtremes(e) {
-    debugger
-    var chart = Highcharts.charts[0];
-    chart.showLoading('Loading data from server...');
-    let diff=(e.max - e.min);
-    let month=30 * 24 * 3600 * 1000;
-    if (e.trigger=='zoom' && diff>month) {
-      this.LazyLoadRequest.emit({ startDate: Math.round(e.min), endDate: Math.round(e.max) });
-      for (let index = 0; index < chart.series.length; index++) {
-        const element = this.readingData.data[index];
-        chart.series[0].setData(_.zip(element.timestamp, element.value));
-      }
-      chart.hideLoading();
-    }else{
-      chart.hideLoading();
-    }   
   }
 }

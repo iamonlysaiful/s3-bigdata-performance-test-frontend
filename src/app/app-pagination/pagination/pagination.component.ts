@@ -1,5 +1,4 @@
 import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -35,13 +34,13 @@ export class PaginationComponent implements OnChanges, OnInit {
   }
 
   populateSize() {
-    // var a = moment(this.chartDateRange[0]);
-    // var b = moment(this.chartDateRange[1]);
-    // let diff = b.diff(a, 'days');
      let diff = this.chartDateCount;
     this.sizes = [];
     if (diff >= 365) {
       this.sizes.push({ value: '365', viewValue: '1 Year' });
+    }
+    if (diff >= 180) {
+      this.sizes.push({ value: '180', viewValue: '6 Month' });
     }
     if (diff >= 30) {
       this.sizes.push({ value: '30', viewValue: '1 Month' });

@@ -71,22 +71,4 @@ export class ApiServiceService {
       }`
     });
   }
-
-  getReadingLazyData(buildingId: number, objectId: number | null, datafieldId: number | null, startTime: string, endTime: string): Observable<ApolloQueryResult<Response>> {
-    return this.apollo.query({
-      query: gql`{
-        readingQuery {
-          readingsLazyData(buildingId: ${buildingId}, objectId: ${objectId}, datafieldId: ${datafieldId}, startTime: "${startTime}", endTime:  "${endTime}") { 
-              buildingName
-              datapointName
-              timestamp
-              value
-          }
-        }
-      }
-      `
-    });
-  }
-
-
 }

@@ -24,19 +24,6 @@ export class S3itestMainComponent {
     const endTime = moment(data.daterange[1]).format("DD-MM-YYYYhh-mm-ss-A");
     this.api.getReadingData(data.buildingId, data.objectId == 0 ? null : data.objectId, data.datafieldId == 0 ? null : data.datafieldId, startTime.toString(), endTime.toString(), page, size).subscribe((res) => {
       this.readingData = res.data.readingQuery.readings;
-      // this.readingData = {
-      //   chartData: res.data.readingQuery.readings,
-      //   chartDateRange: data.daterange
-      // };
-    });
-  }
-
-  getReadingLazyData(searchData,startdate,enddate) {
-    let data = searchData;
-    const startTime = moment(startdate).format("DD-MM-YYYYhh-mm-ss-A");
-    const endTime = moment(enddate).format("DD-MM-YYYYhh-mm-ss-A");
-    this.api.getReadingLazyData(data.buildingId, data.objectId == 0 ? null : data.objectId, data.datafieldId == 0 ? null : data.datafieldId, startTime.toString(), endTime.toString()).subscribe((res) => {
-      this.readingData = res.data.readingQuery.readingsLazyData;
     });
   }
 
@@ -56,13 +43,6 @@ export class S3itestMainComponent {
     if (this.searchData !== undefined) {
       this.size = event.size;
       this.getReadingData(this.searchData, event.size, this.initPage);
-    }
-  }
-
-  onLazyLoadRequest(event){
-    debugger
-    if (this.searchData !== undefined) {
-      this.getReadingLazyData(this.searchData, event.startDate, event.endDate);
     }
   }
 }
