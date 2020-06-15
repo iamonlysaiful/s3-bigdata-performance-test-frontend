@@ -27,7 +27,7 @@ Run CMD/Powershell as Administrator at Cloned Directory and run command given be
 
 > npm i
 
-## Project & Feature Discussion
+## Project 
 
 In brief, In this project I tried to portray possible all features of professional projects within given criteria.
 
@@ -36,8 +36,10 @@ Here is my Project Structure:
 ![Image of Project Structure](src/assets/images/img-1.PNG)
 
 * app
-  * main
+  * app-main
     * s3itest
+  * app-pagination
+    * pagination
   * models
     * queries
   * package
@@ -48,9 +50,12 @@ Here is my Project Structure:
 #### app
 Here **app** is the parent module of all module. It holds all other modules and their components on it
 
-#### main
-**main** is the only sub-module here. Actually it holds main component of project. By created this module 
+#### app-main
+**app-main** is a sub-module here. Actually it holds main component of project. By created this module 
 I tried to portray the pattern of **Lazy Loading Routes** 
+
+#### app-pagination
+**app-pagination** is another sub-module.Purpose of it is chart pagination. It is possible to use like **Extension** all over porject. 
 
 #### models
 It holds all typescript models. and **query** holds all graphql queries typescript models 
@@ -66,12 +71,49 @@ Here I included my api related service and other reusable or utility type functi
 This module.ts generally hold graphql-apollo client configuration for angular globally.
 I also included **Global Error Interceptor** here.
 
-## Screenshots
+## Feature Discussion
 
+> Material Design,
+
+> Higstock chart
+
+> Reactive Form validation, 
+
+> Component Interaction
+
+> Lazy routing
+
+> Pagination on highchart
+
+> Reusable component
+
+
+
+#### Screenshots
+
+**Material Datetime picker**
+
+N.B. *After Selecting First and Last Date Select Set* to apply date range.
 ![Image of Project Structure](src/assets/images/img-2.png)
+
+**Range Selector, Navigator, Pagination implemented**
+
+N.B. *Range Selector & Navigation works on page **Size** of pagination*.I mean Size Dropdown of pagination set area for Range Selector & Navigation
 ![Image of Project Structure](src/assets/images/img-3.png)
+
+**Data Grouping and Average value for Long DateRange Implemented**
+
+N.B. ***Weekly** grouped for **6 Month Range** & **Monthly** grouped for **1 Year Range***.
 ![Image of Project Structure](src/assets/images/img-4.png)
+
+**Healthy Baseline Implemented for System Efficiency & System Cooling Load**
+
+N.B. *Greater than 0.45 is healthy for **System Efficency** Less than 400k is healthy for **System Cooling Load**.*
+If needed can change range dynamically from **line-chart.component.ts** & variable name is **baselineList**
 ![Image of Project Structure](src/assets/images/img-5.png)
+
+**Responsive UI**
+
 ![Image of Project Structure](src/assets/images/img-6.png)
 
 ## Feedback
