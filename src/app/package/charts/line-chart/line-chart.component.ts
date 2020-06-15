@@ -207,15 +207,13 @@ export class LineChartComponent implements OnInit, OnChanges {
             color: '#1c4c74'
           }
         },
+        type: 'datetime',
         labels: {
           rotation: 0,
-          formatter: function () {
-            if (this.isFirst || this.isLast) {
-              return Highcharts.dateFormat('%Y-%b-%e', this.value);
-            } else {
-              return Highcharts.dateFormat('%l:%M %p', this.value);
-            }
-          }
+        },
+        crosshair: true,
+        dateTimeLabelFormats: {
+          second: '%d %b %Y <br/> %H:%M:%S %P',
         },
         events: {
           afterSetExtremes: 
