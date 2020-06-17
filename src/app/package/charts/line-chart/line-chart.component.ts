@@ -210,10 +210,25 @@ export class LineChartComponent implements OnInit, OnChanges {
         type: 'datetime',
         labels: {
           rotation: 0,
+          formatter: function () {
+            if (this.isFirst || this.isLast) {
+              return Highcharts.dateFormat('%Y-%b-%e <br/> %H:%M', this.value);
+            } else {
+
+              return Highcharts.dateFormat(this.dateTimeLabelFormat, this.value)
+
+            }
+          }
         },
         crosshair: true,
         dateTimeLabelFormats: {
-          second: '%d %b %Y <br/> %H:%M:%S %P',
+          second: '%H:%M:%S',
+          minute: '%H:%M',
+          hour: '%H:%M',
+          day: '%e. %b',
+          week: '%e. %b',
+          month: '%b \'%y',
+          year: '%Y'
         },
         events: {
           afterSetExtremes: 
