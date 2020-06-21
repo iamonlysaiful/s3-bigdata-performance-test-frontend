@@ -10,7 +10,7 @@
 
 ## Backend Git Repository
 
-https://gitlab.com/iamonlysaiful/s3-bigdata-performance-test-backend
+https://github.com/iamonlysaiful/s3-bigdata-performance-test-backend
 
 In given link I provided my backend project including specific details with README.md
 
